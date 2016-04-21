@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>布局</title>
+
+	</head>
+
+	<body>
+		<img src="../../images/d3layout.png" />
+		<div>
+			什么时候选择 D3 比较好：
+			<ul>
+				<li>
+					选择 D3：如果希望开发脑海中任意想象到的图表。
+
+				</li>
+				<li>
+					选择 Highcharts、Echarts 等：如果希望开发几种固定种类的、十分大众化的图表。
+				</li>
+			</ul>
+		</div>
+		<section>
+			<p>
+				D3 总共提供了 12 个布局：
+				<ul>
+					<li>
+						饼状图（Pie）
+					</li>
+					<li>
+						力导向图（Force）
+					</li>
+					<li>
+						弦图（Chord）
+					</li>
+					<li>
+						树状图（Tree）
+					</li>
+					<li>
+						集群图（Cluster）
+					</li>
+					<li>
+						捆图（Bundle）
+					</li>
+					<li>
+						打包图（Pack）
+					</li>
+					<li>
+						直方图（Histogram）
+					</li>
+					<li>
+						分区图（Partition）
+					</li>
+					<li>
+						堆栈图（Stack）
+					</li>
+					<li>
+						矩阵树图（Treemap）
+					</li>
+					<li>
+						层级图（Hierarchy）
+					</li>
+				</ul>
+			</p>
+		</section>
+		<section>
+			<p>
+				12 个布局中，层级图（Hierarchy）不能直接使用。
+			</p>
+			<p>
+				集群图、打包图、分区图、树状图、矩阵树图是由层级图扩展来的。
+			</p>
+			<p>
+				如此一来，能够使用的布局是 11 个（有 5 个是由层级图扩展而来）。
+			</p>
+			<p>
+				这些布局的作用都是将某种数据转换成另一种数据，而转换后的数据是利于可视化的。
+			</p>
+		</section>
+
+
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+
+	</script>
+
+	<style>
+	.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+
+		.MyRect {
+			/*fill: steelblue;*/
+		}
+
+		.MyText {
+			fill: white;
+			text-anchor: middle;
+		}
+	</style>
+
+</html>

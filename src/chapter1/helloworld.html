@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>helloword</title>
+
+	</head>
+
+	<body>
+		<p>
+
+		</p>
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+	var helloworld = d3.select('body').append('div').text('helloworld');
+	helloworld.style('color', 'red')
+		.style("font-size", "72px");
+
+	var changeworld = d3.select('body').select('p').text('code just change the world');
+	//在 D3 中，用于选择元素的函数有两个：
+	//d3.select()：是选择所有指定元素的第一个
+	//d3.selectAll()：是选择指定元素的全部
+	</script>
+
+</html>

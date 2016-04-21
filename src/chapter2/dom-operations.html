@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>DOM元素操作</title>
+
+	</head>
+
+	<body>
+		<div class="container1">
+			<p>Apple</p>
+			<p>Pear</p>
+			<p>Banana</p>
+		</div>
+		<p>
+			插入元素涉及的函数有两个：
+			<ul>
+				<li>
+					append()：在选择集末尾插入元素
+
+				</li>
+				<li>
+					insert()：在选择集前面插入元素
+
+				</li>
+			</ul>
+		</p>
+		<div class="container2">
+			<p id="first">Apple</p>
+			<p id="rm">Pear</p>
+			<p>Banana</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+	var body = d3.select('body');
+	var container1 = body.select('.container1');
+	var p = container1.selectAll("p");
+	p.style("color", "blue");
+	var p1 = container1.select("p");
+	p1.style("color", "red");
+	//插入元素
+	var container2=body.select('.container2');
+	container2.append('p').text('this is appendend').style('color','pink');
+	container2.insert('p','#first').text('this is inserted').style('color','green')
+	var rm=container2.select('#rm');
+	var i=5;
+  	var timer=setInterval(function(){
+		if(i>0){
+		console.log('将在%d秒后删除pear元素',i);
+		}
+		else{
+			console.log('rm.remove() is on fire')
+			rm.remove();
+			clearInterval(timer);
+
+		}
+		i--;
+	},1000)
+	</script>
+
+</html>

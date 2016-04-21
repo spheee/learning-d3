@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>交互动作</title>
+
+	</head>
+
+	<body>
+		<p>
+			鼠标常用的事件有：
+			<ul>
+				<li>
+					click：鼠标单击某元素时，相当于 mousedown 和 mouseup 组合在一起。
+
+				</li>
+				<li>
+					mouseover：光标放在某元素上。
+
+				</li>
+				<li>
+					mouseout：光标从某元素上移出来时。
+
+				</li>
+				<li>
+					mousemove：鼠标被移动的时候。
+
+				</li>
+				<li>
+					mousedown：鼠标按钮被按下。
+
+				</li>
+				<li>
+					mouseup：鼠标按钮被松开。
+
+				</li>
+				<li>
+					dblclick：鼠标双击。
+
+				</li>
+			</ul>
+			键盘常用的事件有三个：
+			<ul>
+				<li>
+					keydown：当用户按下任意键时触发，按住不放会重复触发此事件。该事件不会区分字母的大小写，例如“A”和“a”被视为一致。
+
+				</li>
+				<li>
+					keypress：当用户按下字符键（大小写字母、数字、加号、等号、回车等）时触发，按住不放会重复触发此事件。该事件区分字母的大小写。
+
+				</li>
+				<li>
+					keyup：当用户释放键时触发，不区分字母的大小写。
+
+				</li>
+			</ul>
+			触屏常用的事件有三个：
+			<ul>
+				<li>
+					touchstart：当触摸点被放在触摸屏上时。
+
+				</li>
+				<li>
+					touchmove：当触摸点在触摸屏上移动时。
+
+				</li>
+				<li>
+					touchend：当触摸点从触摸屏上拿开时。
+
+				</li>
+			</ul>
+		</p>
+
+
+
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+
+		//画布大小
+		var width = 400;
+		var height = 400;
+
+		//在 body 里添加一个 SVG 画布
+		var svg = d3.select("body")
+			.append("svg")
+			.attr("width", width)
+			.attr("height", height);
+
+		//画布周边的空白
+		var padding = {left:30, right:30, top:20, bottom:20};
+
+		//定义一个数组
+		var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+
+		//x轴的比例尺
+		var xScale = d3.scale.ordinal()
+			.domain(d3.range(dataset.length))
+			.rangeRoundBands([0, width - padding.left - padding.right]);
+
+		//y轴的比例尺
+		var yScale = d3.scale.linear()
+			.domain([0,d3.max(dataset)])
+			.range([height - padding.top - padding.bottom, 0]);
+
+		//定义x轴
+		var xAxis = d3.svg.axis()
+			.scale(xScale)
+			.orient("bottom");
+
+		//定义y轴
+		var yAxis = d3.svg.axis()
+			.scale(yScale)
+			.orient("left");
+
+		//矩形之间的空白
+		var rectPadding = 4;
+
+		//添加矩形元素
+		var rects = svg.selectAll(".MyRect")
+			.data(dataset)
+			.enter()
+			.append("rect")
+			.attr("class","MyRect")
+			.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+			.attr("x", function(d,i){
+				return xScale(i) + rectPadding/2;
+			} )
+			.attr("y",function(d){
+				return yScale(d);
+			})
+			.attr("width", xScale.rangeBand() - rectPadding )
+			.attr("height", function(d){
+				return height - padding.top - padding.bottom - yScale(d);
+			})
+			.attr("fill","steelblue")		//填充颜色不要写在CSS里
+			.on("click",function(d,i){
+				console.log('当前点击的是第%d列,事件类型是%s',i,d3.event.type)
+				
+			})
+			.on("mouseover",function(d,i){
+				//this 这里是dom对象
+				d3.select(this)
+					.attr("fill","yellow");
+			})
+			.on("mouseout",function(d,i){
+				d3.select(this)
+					.transition()
+			        .duration(500)
+					.attr("fill","steelblue");
+			})
+
+
+		//添加文字元素
+		var texts = svg.selectAll(".MyText")
+			.data(dataset)
+			.enter()
+			.append("text")
+			.attr("class","MyText")
+			.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+			.attr("x", function(d,i){
+				return xScale(i) + rectPadding/2;
+			} )
+			.attr("y",function(d){
+				return yScale(d);
+			})
+			.attr("dx",function(){
+				return (xScale.rangeBand() - rectPadding)/2;
+			})
+			.attr("dy",function(d){
+				return 20;
+			})
+			.text(function(d){
+				return d;
+			});
+
+		//添加x轴
+		svg.append("g")
+			.attr("class","axis")
+			.attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
+			.call(xAxis);
+
+		//添加y轴
+		svg.append("g")
+			.attr("class","axis")
+			.attr("transform","translate(" + padding.left + "," + padding.top + ")")
+			.call(yAxis);
+
+
+	</script>
+
+	<style>
+	.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+
+		.MyRect {
+			/*fill: steelblue;*/
+		}
+
+		.MyText {
+			fill: white;
+			text-anchor: middle;
+		}
+	</style>
+
+</html>

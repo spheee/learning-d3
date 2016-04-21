@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>选择器</title>
+
+	</head>
+
+	<body>
+		<h3>选择器</h3>
+		<p>
+			选择器 在 D3 中，用于选择元素的函数有两个：
+			<ul>
+				<li>
+					d3.select()：是选择所有指定元素的第一个
+				</li>
+				<li>
+					d3.selectAll()：是选择指定元素的全部
+				</li>
+			</ul>
+		</p>
+
+		<h3>数据绑定</h3>
+		<p>
+			D3 中是通过以下两个函数来绑定数据的：
+			<ul>
+				<li>
+					datum()：绑定一个数据到选择集上
+				</li>
+				<li>
+					data()：绑定一个数组到选择集上，数组的各项值分别与选择集的各元素绑定
+				</li>
+			</ul>
+		</p>
+		<div id="bind">
+			<p>Apple</p>
+			<p>Pear</p>
+			<p>Banana</p>
+		</div>
+		<div id="bind2">
+			<p>Apple</p>
+			<p>Pear</p>
+			<p>Banana</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+	var str = "holmesky";
+	var body = d3.select('body');
+	//选择器的形式基本与jquery 相同
+	var p = body.selectAll('#bind p');
+	p.datum(str);
+	//value 值，index 索引值
+	p.text(function(value, index) {
+		return "第" + index + "个元素绑定的数据是" + value;
+	})
+	var dataset = ["I like dogs","I like cats","I like snakes"];
+	var p2=body.selectAll('#bind2 p');
+	p2.data(dataset).text(function(value,index){
+		return value;
+	})
+	</script>
+
+</html>

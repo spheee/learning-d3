@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>动画</title>
+
+	</head>
+
+	<body>
+		<a href="http://www.ourd3js.com/wordpress/?p=127">动画API</a>
+		<p>
+			transition() 启动过渡效果。
+		</p>
+		<p>
+			duration() 指定过渡的持续时间，单位为毫秒
+		</p>
+		<p>
+			ease()指定过渡的方式，常用的有：
+			<ul>
+				<li>
+					linear：普通的线性变化
+				</li>
+				<li>
+					circle：慢慢地到达变换的最终状态
+				</li>
+				<li>
+					elastic：带有弹跳的到达最终状态
+				</li>
+				<li>
+					bounce：在最终状态处弹跳几次
+
+				</li>
+			</ul>
+
+		</p>
+		<p>
+			delay() 指定延迟的时间，表示一定时间后才开始转变，单位同样为毫秒。此函数可以对整体指定延迟，也可以对个别指定延迟。
+		</p>
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+	//画布大小
+	var height = 400;
+	var width = 400;
+	//添加SVG画布
+	var svg = d3.select("body")
+		.append('svg')
+		.attr('width', width)
+		.attr('height',height)
+
+	var padding = {
+		left: 20,
+		right: 20,
+		top: 20,
+		bottom: 20
+	};
+
+	//定义一个数组
+	var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+
+	//x轴的比例尺
+	var xScale = d3.scale.ordinal()
+		.domain(d3.range(dataset.length))
+		.rangeRoundBands([0, width - padding.left - padding.right]);
+
+	//y轴的比例尺
+	var yScale = d3.scale.linear()
+		.domain([0, d3.max(dataset)])
+		.range([height - padding.top - padding.bottom, 0]);
+
+	//定义x轴
+	var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom");
+
+	//定义y轴
+	var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient("left");
+
+
+	//矩形之间的空白
+	var rectPadding = 4;
+
+	//添加矩形元素
+	var rects = svg.selectAll(".MyRect")
+		.data(dataset)
+		.enter()
+		.append("rect")
+		.attr("class", "MyRect")
+		.attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+		.attr("x", function(d, i) {
+			return xScale(i) + rectPadding / 2;
+		})
+		.attr("y",function(d){
+		    var min = yScale.domain()[0];
+		    return yScale(min);
+		})
+		.attr("height", function(d){	//这里高度置0
+			return 0;
+		})
+		.attr("fill","red")         //初始颜色为红色
+
+		.transition()
+		.delay(function(d,i){
+		    return i * 100;
+		})
+		.duration(500)
+
+		.attr("fill","steelblue") //最终颜色
+
+		.ease("linear")
+		.attr("y",function(d){
+		    return yScale(d);
+		})
+		.attr("width", xScale.rangeBand() - rectPadding)
+		.attr("height", function(d) {
+			return height - padding.top - padding.bottom - yScale(d);
+		})
+		// .transition()               //启动过渡
+		// .duration(5000)
+
+	//添加文字元素
+	var texts = svg.selectAll(".MyText")
+		.data(dataset)
+		.enter()
+		.append("text")
+		.attr("class", "MyText")
+		.attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+		.attr("x", function(d, i) {
+			return xScale(i) + rectPadding / 2;
+		})
+		.attr("y",function(d){
+		    var min = yScale.domain()[0];
+		    return yScale(min);
+		})
+		.transition()
+		.delay(function(d,i){
+		    return i * 100;
+		})
+		.duration(500)
+		.ease("linear")
+		.attr("y",function(d){
+		    return yScale(d);
+		})
+		.attr("dx", function() {
+			return (xScale.rangeBand() - rectPadding) / 2;
+		})
+		.attr("dy", function(d) {
+			return 20;
+		})
+		.text(function(d) {
+			return d;
+		});
+	//添加x轴
+	svg.append("g")
+		.attr("class", "axis")
+		.attr("transform", "translate(" + padding.left + "," + (height - padding.bottom) + ")")
+		.call(xAxis);
+
+	//添加y轴
+	svg.append("g")
+		.attr("class", "axis")
+		.attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+		.call(yAxis);
+
+
+
+
+			var  svg2=d3.select('body').append('svg').attr('height',height).attr('width',width)
+var circle1 = svg2.append("circle")
+        .attr("cx", 100)
+        .attr("cy", 100)
+        .attr("r", 45)
+        .style("fill","green");
+
+//在1秒（1000毫秒）内将圆心坐标由100变为300
+circle1.transition()
+    .duration(1000)
+    .attr("cx", 300);
+
+	var circle2 = svg2.append("circle")
+	        .attr("cx", 100)
+	        .attr("cy", 100)
+	        .attr("r", 45)
+	        .style("fill","green");
+
+	//在1.5秒（1500毫秒）内将圆心坐标由100变为300，
+	//将颜色从绿色变为红色
+	circle2.transition()
+	    .duration(1500)
+	    .attr("cx", 300)
+	    .style("fill","red");
+
+			var circle3 = svg2.append("circle")
+			        .attr("cx", 100)
+			        .attr("cy", 100)
+			        .attr("r", 45)
+			        .style("fill","green");
+
+		//在2秒（2000毫秒）内将圆心坐标由100变为300
+		//将颜色从绿色变为红色
+		//将半径从45变成25
+		//过渡方式采用bounce（在终点处弹跳几次）
+		circle3.transition()
+		    .duration(2000)
+		    .ease("bounce")
+		    .attr("cx", 300)
+		    .style("fill","red")
+		    .attr("r", 25);
+
+	</script>
+
+
+	<style>
+	.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+
+		.MyRect {
+			/*fill: steelblue;*/
+		}
+
+		.MyText {
+			fill: white;
+			text-anchor: middle;
+		}
+	</style>
+
+</html>

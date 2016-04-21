@@ -1,0 +1,17 @@
+{
+  "name": "learning-d3",
+  "version": "1.0.0",
+  "description": "A personal letter in learing d3",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "d3"
+  ],
+  "author": "{\"name\":\"holmesky\",\"url\":\"https://github.com/spheee\"}",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^3.5.16"
+  }
+}
