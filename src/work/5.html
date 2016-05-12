@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>浙江地图</title>
+
+	</head>
+	<style>
+	.anchor circle {
+		r: 5;
+		fill: red;
+	}
+
+	.lefttop {
+		transform: translate(200px, 200px);
+	}
+
+	.leftbottom {
+		transform: translate(200px, 800px);
+	}
+
+	.righttop {
+		transform: translate(800px, 200px);
+	}
+
+	.rightbottom {
+		transform: translate(800px, 800px);
+	}
+	/*地图提示框*/
+
+	.tooltip {
+		position: absolute;
+		height: auto;
+		background: RGBA(22, 38, 75, .7500);
+		border: 2px solid #32A5F6;
+		box-sizing: border-box;
+		color: #70A4C4;
+		box-shadow: 2px 2px 10px RGBA(29, 31, 33, .500);
+		/*border-radius: 5px;*/
+	}
+
+	.tooltip .container {
+		padding: 15px;
+		box-shadow: 0 0 10px RGBA(125, 186, 227, 1.00) inset;
+	}
+
+	.tooltip .top-left {
+		position: absolute;
+		border: solid #8AD6FD;
+		border-right: 0px;
+		border-bottom: 0px;
+		border-width: 4px;
+		/*transform: rotate(45deg);*/
+		width: 15px;
+		display: block;
+		height: 15px;
+		/*float: right;*/
+		left: -3px;
+		top: -3px;
+	}
+
+	.tooltip .top-right {
+		position: absolute;
+		border: solid #8AD6FD;
+		border-left: 0px;
+		border-bottom: 0px;
+		border-width: 4px;
+		/*transform: rotate(45deg);*/
+		width: 15px;
+		display: block;
+		height: 15px;
+		/*float: right;*/
+		right: -3px;
+		top: -3px;
+	}
+
+	.tooltip .bottom-left {
+		position: absolute;
+		border: solid #8AD6FD;
+		border-right: 0px;
+		border-top: 0px;
+		border-width: 4px;
+		/*transform: rotate(45deg);*/
+		width: 15px;
+		display: block;
+		height: 15px;
+		/*float: right;*/
+		left: -3px;
+		bottom: -3px;
+	}
+
+	.tooltip .bottom-right {
+		position: absolute;
+		border: solid #8AD6FD;
+		border-left: 0px;
+		border-top: 0px;
+		border-width: 4px;
+		/*transform: rotate(45deg);*/
+		width: 15px;
+		display: block;
+		height: 15px;
+		/*float: right;*/
+		right: -3px;
+		bottom: -3px;
+	}
+	/*地图地标*/
+
+	.rad circle {
+		fill: #f05c32;
+		transform: rotateX(60deg);
+	}
+
+	.rad.on circle {
+		fill: steelblue;
+	}
+
+	.rad .location {
+		animation: 1.5s linear infinite;
+		animation-name: tranform-location;
+	}
+
+	.rad.on .location {
+		fill: steelblue;
+	}
+
+	.rad .inner {
+		cx: 26;
+		cy: 95;
+		r: 2;
+		fill-opacity: 1;
+		stroke-width: 0;
+		stroke: inherit;
+		animation: 1.5s linear infinite;
+		animation-name: tranform-inner;
+	}
+
+	.rad .middle {
+		cx: 26;
+		cy: 95;
+		r: 8;
+		fill-opacity: 0.7;
+		stroke-width: 0;
+		stroke: inherit;
+		animation: 1.5s linear infinite;
+		animation-name: tranform-mid;
+	}
+
+	.rad .outer {
+		cx: 26;
+		cy: 95;
+		r: 16;
+		fill-opacity: 0.4;
+		stroke-width: 0;
+		stroke: inherit;
+		animation: 1.5s linear infinite;
+		animation-name: tranform-outer;
+	}
+
+	@keyframes tranform-location {
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	@keyframes tranform-inner {
+		33% {
+			r: 5;
+			fill-opacity: 0.8;
+		}
+		100% {
+			r: 8;
+			fill-opacity: 0.7;
+		}
+	}
+
+	@keyframes tranform-mid {
+		33% {
+			r: 12;
+			fill-opacity: 0.6;
+		}
+		100% {
+			r: 16;
+			fill-opacity: 0.4;
+		}
+	}
+
+	@keyframes tranform-outer {
+		33% {
+			fill-opacity: 0.2;
+			r: 20;
+		}
+		100% {
+			fill-opacity: 0;
+			r: 24
+		}
+	}
+	</style>
+
+	<body>
+		<!-- <div class="tooltip">
+			<i class="top-left"></i>
+			<i class="top-right"></i>
+			<i class="bottom-left"></i>
+			<i class="bottom-right"></i>
+			<div class="container">
+				这是提示框
+				<br /> 换行
+				<br /> 再换行
+			</div>
+		</div> -->
+
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script src="newprovince.js"></script>
+
+	<script>
+	
+	</script>
+
+	<style>
+
+	</style>
+
+</html>

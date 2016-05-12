@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>红圈动画</title>
+
+	</head>
+
+	<body>
+		<svg width="300px" height="100px">
+			<rect x="0" y="0" width="300" height="100" stroke="black" stroke-width="1" />
+			<circle cx="0" cy="50" r="15" fill="blue" stroke="black" stroke-width="1">
+				<animate attributeName="cx" from="0" to="100" dur="5s" repeatCount="indefinite" />
+			</circle>
+		</svg>
+		<svg width="300px" height="100px">
+			<rect x="0" y="0" width="300" height="100" stroke="black" stroke-width="1" />
+			<rect x="0" y="50" width="15" height="34" fill="blue" stroke="black" stroke-width="1" transform="rotation">
+
+				<animateTransform attributeName="transform" begin="0s" dur="20s" type="rotate" from="0 60 60" to="360 100 60" repeatCount="indefinite" />
+				<!-- Rotate from 0 to 360 degrees, and move from 60 to 100 in the x direction. -->
+				<!-- Keep doing this until the drawing no longer exists. -->
+
+			</rect>
+		</svg>
+
+
+		<svg width="300px" height="100px">
+			<rect x="0" y="0" width="300" height="100" stroke="black" stroke-width="1" />
+			<circle cx="0" cy="50" r="15" fill="blue" stroke="black" stroke-width="1">
+				<animateMotion path="M 0 0 H 300 Z" dur="3s" repeatCount="indefinite" />
+			</circle>
+		</svg>
+		<svg width="300px" height="100px">
+   <rect x="0" y="0" width="300" height="100" stroke="black" stroke-width="1" />
+   <rect x="0" y="0" width="20" height="20" fill="blue" stroke="black" stroke-width="1">
+	 <animateMotion path="M 250,80 H 50 Q 30,80 30,50 Q 30,20 50,20 H 250 Q 280,20,280,50 Q 280,80,250,80Z"
+	   dur="3s" repeatCount="indefinite" rotate="auto">
+   </rect>
+ </svg>
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+	var width = 1000;
+	var height = 1000;
+
+	// var svg = d3.select("body").append("svg")
+	//     .attr("width", width)
+	//     .attr("height", height)
+	//     // .append("g")
+	//     .attr("transform", "translate(0,0)")
+	// 	.attr("zIndex",1)
+	//
+	</script>
+
+	<style>
+
+	</style>
+
+</html>

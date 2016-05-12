@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>红圈动画</title>
+
+	</head>
+
+	<body>
+
+		<svg width="55px" height="70px">
+			<g class="rad">
+				<circle class="inner"></circle>
+				<circle class="middle"></circle>
+				<circle class="outer"></circle>
+				<!-- <circle class="settle"></circle> -->
+
+				<path fill="#f05c32" class="location" d="M26.000,49.000 C26.000,49.000 15.000,37.075 15.000,31.000 C15.000,24.925 19.925,20.000 26.000,20.000 C32.075,20.000 37.000,24.925 37.000,31.000 C37.000,37.075 26.000,49.000 26.000,49.000 ZM26.000,27.000 C23.791,27.000 22.000,28.791 22.000,31.000 C22.000,33.209 23.791,35.000 26.000,35.000 C28.209,35.000 30.000,33.209 30.000,31.000 C30.000,28.791 28.209,27.000 26.000,27.000 Z"/>
+					<!-- <path d="M25,0C11.191,0,0,11.194,0,25z"></path> -->
+			</g>
+
+		</svg>
+	</body>
+	<script type="text/javascript" src="../../node_modules/d3/d3.js" charset="utf-8"></script>
+	<script>
+	</script>
+
+	<style>
+
+
+		.rad circle{
+			fill:#f05c32;
+			transform: rotateX(60deg);
+		}
+
+		.rad .location{
+
+			animation: 1.5s linear infinite;
+			animation-name: tranform-location;
+		}
+		.rad .inner {
+			cx: 26;
+			cy: 95;
+			r: 2;
+
+			fill-opacity:1;
+			stroke-width: 0;
+			stroke: inherit;
+			animation: 1.5s linear infinite;
+			animation-name: tranform-inner;
+		}
+		.rad .middle{
+			cx: 26;
+			cy: 95;
+			r: 8;
+
+			fill-opacity:0.7;
+			stroke-width: 0;
+			stroke: inherit;
+
+			animation: 1.5s linear infinite;
+			animation-name: tranform-mid;
+		}
+		.rad .outer{
+			cx: 26;
+			cy: 95;
+			r: 16;
+
+			fill-opacity:0.4;
+			stroke-width: 0;
+			stroke: inherit;
+			animation: 1.5s linear infinite;
+			animation-name: tranform-outer;
+		}
+		@keyframes tranform-location{
+			50%{
+				transform:translateY(-10px);
+
+			}
+		}
+		@keyframes tranform-inner{
+			33%{
+				r:5;
+				fill-opacity:0.8;
+			}
+			/*66%{
+				r:8;
+				fill-opacity:0.6;
+
+			}*/
+			100%{
+				r:8;
+				fill-opacity:0.7;
+
+			}
+		}
+		@keyframes tranform-mid{
+			33%{
+				r:12;
+				fill-opacity:0.6;
+			}
+
+			100%{
+				r:16;
+				fill-opacity:0.4;
+
+			}
+		}
+		@keyframes tranform-outer{
+			/*25%{
+				r:18;
+			}*/
+			33%{
+				fill-opacity:0.2;
+				r:20;
+			}
+			/*75%{
+				r:22
+			}*/
+			100%{
+				fill-opacity:0;
+
+				r:24
+			}
+		}
+
+
+
+	@keyframes stroke-a {
+		12.5% {
+			r: 10;
+			stroke-width: 4;
+			stroke-opacity:.3;
+			stroke: steelblue;
+		}
+		25% {
+			r: 15;
+			stroke-width: 8;
+			stroke: steelblue;
+			stroke-opacity:.3;
+
+
+		}
+		75% {
+			r: 15;
+			stroke-width: 8;
+			stroke-opacity:.3;
+
+			stroke: steelblue;
+		}
+		87.5% {
+			r: 10;
+			stroke-width: 4;
+			stroke-opacity:.3;
+
+			stroke: steelblue;
+		}
+	}
+	@keyframes stroke-b {
+		25% {
+			stroke-width: 0;
+			stroke: #81C0D9;
+		}
+		37.5% {
+			r: 17;
+			stroke-width: 3;
+			/*stroke-opacity:.3;*/
+			stroke: #81C0D9;
+		}
+		50% {
+			r: 19;
+			stroke-width: 6;
+			stroke: #81C0D9;
+		}
+		62.5% {
+			r: 17;
+			stroke-width: 3;
+			/*stroke-opacity:.3;*/
+			stroke: #81C0D9;
+		}
+		75% {
+			stroke-width: 0;
+			stroke: #81C0D9;
+		}
+	}
+
+
+
+	@keyframes transform-1 {
+		30% {
+			/*-webkit-transform: scale(1);
+	    transform: scale(1);*/
+			r: 10;
+			stroke-width: 10;
+		}
+		60% {
+			r: 15;
+			stroke-width: 10;
+		}
+	}
+
+	@-webkit-keyframes opacity {
+		3% {
+			fill-opacity: 1;
+		}
+		75% {
+			fill-opacity: 0;
+		}
+	}
+
+	@keyframes opacity {
+		3% {
+			fill-opacity: 1;
+		}
+		75% {
+			fill-opacity: 0;
+		}
+	}
+
+	@-webkit-keyframes opacity-stroke {
+		10% {
+			stroke-opacity: 1;
+		}
+		85% {
+			stroke-opacity: 0;
+		}
+	}
+
+	@keyframes opacity-stroke {
+		10% {
+			stroke-opacity: 1;
+		}
+		85% {
+			stroke-opacity: 0;
+		}
+	}
+
+	@-webkit-keyframes colors {
+		0% {
+			fill: yellowgreen;
+		}
+		10% {
+			fill: gold;
+		}
+		75% {
+			fill: crimson;
+		}
+	}
+
+	@keyframes colors {
+		0% {
+			fill: yellowgreen;
+		}
+		10% {
+			fill: gold;
+		}
+		75% {
+			fill: crimson;
+		}
+	}
+
+	@-webkit-keyframes colors-stroke {
+		0% {
+			stroke: #E16241;
+		}
+		33% {
+			stroke: #A89794;
+		}
+		66% {
+			stroke: #81C0D9;
+		}
+	}
+
+	@keyframes colors-stroke {
+		0% {
+			stroke: #E16241;
+		}
+		10% {
+			stroke: #A89794;
+		}
+		75% {
+			stroke: #81C0D9;
+		}
+	}
+
+	@-webkit-keyframes colors-2 {
+		0% {
+			fill: yellow;
+		}
+		50% {
+			fill: red;
+		}
+		65% {
+			fill: orangered;
+		}
+		95% {
+			fill: gold;
+		}
+	}
+
+	@keyframes colors-2 {
+		0% {
+			fill: yellow;
+		}
+		50% {
+			fill: red;
+		}
+		65% {
+			fill: orangered;
+		}
+		95% {
+			fill: gold;
+		}
+	}
+
+	@-webkit-keyframes colors-3 {
+		0% {
+			fill: yellowgreen;
+		}
+		50% {
+			fill: turquoise;
+		}
+		65% {
+			fill: yellow;
+		}
+		95% {
+			fill: orange;
+		}
+	}
+
+	@keyframes colors-3 {
+		0% {
+			fill: yellowgreen;
+		}
+		50% {
+			fill: turquoise;
+		}
+		65% {
+			fill: yellow;
+		}
+		95% {
+			fill: orange;
+		}
+	}
+
+	@-webkit-keyframes transform {
+		10% {
+			-webkit-transform: scale(0.75);
+			transform: scale(0.75);
+		}
+	}
+
+	@keyframes transform {
+		10% {
+			-webkit-transform: scale(0.75);
+			transform: scale(0.75);
+		}
+	}
+
+	@-webkit-keyframes transform-2 {
+		40% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+		60% {
+			stroke-width: 30;
+		}
+	}
+
+	@keyframes transform-2 {
+		40% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+		60% {
+			stroke-width: 30;
+		}
+	}
+	</style>
+
+</html>
